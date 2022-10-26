@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 
 const Setting = {
-  offersCount: 5,
+  OffersCount: 5,
 } as const;
 
 const root = ReactDOM.createRoot(
@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
-      offersCount = {Setting.offersCount}
+      offersCount = {Setting.OffersCount}
     />
   </React.StrictMode>,
 );
