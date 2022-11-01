@@ -8,12 +8,16 @@ import LoginPage from '../../pages/login-page/login-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PropertyPage from '../../pages/property-page/property-page';
 import PrivateRoute from '../../components/private-route/private-route';
+import {Offer} from '../../types/offer';
+import {Review} from '../../types/review';
 
 type AppScreenProps = {
   offersCount: number;
+  offers: Offer[];
+  reviews: Review[];
 }
 
-function App({offersCount}: AppScreenProps): JSX.Element {
+function App({offersCount, offers, reviews}: AppScreenProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -21,7 +25,7 @@ function App({offersCount}: AppScreenProps): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={<MainPage OffersCount={offersCount} />}
+            element={<MainPage offersCount={offersCount} offers={offers}/>}
           />
           <Route
             path={AppRoute.Login}
@@ -31,15 +35,15 @@ function App({offersCount}: AppScreenProps): JSX.Element {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute
-                authorizationStatus={AuthorizationStatus.NoAuth}
+                authorizationStatus={AuthorizationStatus.Auth}
               >
-                <FavoritesPage />
+                <FavoritesPage offers = {offers}/>
               </PrivateRoute>
             }
           />
           <Route
             path={`${AppRoute.Room}/:id`}
-            element={<PropertyPage />}
+            element={<PropertyPage reviews={reviews} offers={offers}/>}
           />
           <Route
             path="*"

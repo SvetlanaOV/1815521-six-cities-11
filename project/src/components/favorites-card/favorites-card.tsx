@@ -1,25 +1,21 @@
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
 
-type CardProps = {
-  offer: Offer;
-  onMouseOver?: () => void;
+type FavoritesCardProps = {
+    offer: Offer;
 }
+function FavoritesCard({offer}: FavoritesCardProps): JSX.Element{
+  const {id, isPremium, previewImage, price, rating, title, type} = offer;
 
-function Card ({offer, onMouseOver}: CardProps) {
-  const {id, previewImage, isPremium, price, rating, title, type} = offer;
-
-  return(
-    <article className="cities__card place-card"
-      onMouseOver={onMouseOver}
-    >
+  return (
+    <article className="favorites__card place-card">
       {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null}
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place" />
+      <div className="favorites__image-wrapper place-card__image-wrapper">
+        <Link to={`/offer/:${id}`}>
+          <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place"/>
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -34,12 +30,12 @@ function Card ({offer, onMouseOver}: CardProps) {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: '80%'}}></span>
+            <span style={{width: '100%'}}></span>
             <span className="visually-hidden">{rating}</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}`}>{title}</Link>
+          <Link to={`/offer/:${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -47,4 +43,4 @@ function Card ({offer, onMouseOver}: CardProps) {
   );
 }
 
-export default Card;
+export default FavoritesCard;
