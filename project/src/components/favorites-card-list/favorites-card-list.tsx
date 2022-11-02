@@ -1,12 +1,14 @@
-import FavoritesCard from '../favorites-card/favorites-card';
+import Card from '../../components/card/card';
+import {CardClassName} from '../../components/const';
 import {Offer} from '../../types/offer';
 import {CITIES} from '../const';
 
 type FavoritesCardListProps = {
     offers: Offer[];
+    className: CardClassName;
   }
 
-function FavoritesCardList({offers}:FavoritesCardListProps) {
+function FavoritesCardList({offers, className}:FavoritesCardListProps) {
   return(
     <ul className="favorites__list">
       {CITIES.map((city)=> {
@@ -23,9 +25,10 @@ function FavoritesCardList({offers}:FavoritesCardListProps) {
               </div>
               <div className="favorites__places">
                 {currentCityOffers.map((offer)=> (
-                  <FavoritesCard
+                  <Card
                     key={offer.id}
                     offer={offer}
+                    className={className}
                   />
                 ))}
               </div>

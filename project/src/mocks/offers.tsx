@@ -9,7 +9,7 @@ export const offers: Offer[] = [
         longitude: 4.895168,
         zoom: 10
       },
-      name: 'Berlin'
+      name: 'Paris'
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Berlin.',
     goods: [
@@ -26,7 +26,7 @@ export const offers: Offer[] = [
     images: [
       'img/apartment-01.jpg', 'img/apartment-02.jpg'
     ],
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     location: {
       latitude: 52.35514938496378,
@@ -64,7 +64,7 @@ export const offers: Offer[] = [
     images: [
       'img/apartment-03.jpg'
     ],
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     location: {
       latitude: 52.35514938496378,
@@ -110,7 +110,7 @@ export const offers: Offer[] = [
       zoom: 8
     },
     maxAdults: 4,
-    previewImage: 'img//apartment-01.jpg',
+    previewImage: 'img/apartment-01.jpg',
     price: 100,
     rating: 4.0,
     title: 'Beautiful & luxurious hotel',

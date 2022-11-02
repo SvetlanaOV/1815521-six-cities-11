@@ -2,6 +2,7 @@ import {Link} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 import {AppRoute} from '../../components/const';
 import CardList from '../../components/card-list/card-list';
+import {CardClassName} from '../../components/const';
 import {Offer} from '../../types/offer';
 
 type MainPageProps = {
@@ -102,7 +103,9 @@ function MainPage({offersCount, offers}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CardList offers = {offers}/>
+              <div className="cities__places-list places__list tabs__content">
+                <CardList offers = {offers} className={CardClassName.Cities}/>
+              </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

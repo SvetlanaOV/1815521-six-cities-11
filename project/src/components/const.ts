@@ -11,6 +11,12 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum CardClassName {
+  Cities = 'cities',
+  Favorites = 'favorites',
+  Near = 'near-places',
+}
+
 export const CITIES = ['Tokio', 'Paris', 'Berlin', 'Amsterdam'];
 
 export const REVIEW_STAR_RATING = [
