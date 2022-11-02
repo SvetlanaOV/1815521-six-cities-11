@@ -21,23 +21,23 @@ export const CITIES = ['Tokio', 'Paris', 'Berlin', 'Amsterdam'];
 
 export const REVIEW_STAR_RATING = [
   {
-    startNumber: 5,
+    starNumber: 5,
     title: 'perfect'
   },
   {
-    startNumber: 4,
+    starNumber: 4,
     title: 'good'
   },
   {
-    startNumber: 3,
+    starNumber: 3,
     title: 'not bad'
   },
   {
-    startNumber: 2,
+    starNumber: 2,
     title: 'badly'
   },
   {
-    startNumber: 1,
+    starNumber: 1,
     title: 'terribly'
   },
 ];
