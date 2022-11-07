@@ -70,7 +70,7 @@ function PropertyPage({reviews, offers}: PropertyPageProps): JSX.Element {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {isPremium ? <div className="property__mark"><span>Premium</span></div> : null}
+              {isPremium && <div className="property__mark"><span>Premium</span></div>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
@@ -120,14 +120,11 @@ function PropertyPage({reviews, offers}: PropertyPageProps): JSX.Element {
                   <span className="property__user-name">
                     {host.name}
                   </span>
-                  {host.isPro ? <span className="property__user-status">Pro</span> : null}
+                  {host.isPro && <span className="property__user-status">Pro</span>}
                 </div>
                 <div className="property__description">
                   <p className="property__text">
                     {description}
-                  </p>
-                  <p className="property__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
                   </p>
                 </div>
               </div>
@@ -151,7 +148,7 @@ function PropertyPage({reviews, offers}: PropertyPageProps): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <CardList offers={nearOffers} className={CardClassName.Near}/>
+              <CardList offers={nearOffers} className={CardClassName.Near} onCardHover={() => null} onCardLeave={() => null}/>
             </div>
           </section>
         </div>

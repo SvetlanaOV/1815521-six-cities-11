@@ -4,18 +4,20 @@ import {Offer} from '../../types/offer';
 import {CITIES} from '../const';
 
 type FavoritesCardListProps = {
-    offers: Offer[];
-    className: CardClassName;
-  }
+  offers: Offer[];
+  className: CardClassName;
+  onCardHover: (id: number) => void;
+  onCardLeave: (id: number) => void;
+}
 
-function FavoritesCardList({offers, className}:FavoritesCardListProps) {
+function FavoritesCardList({offers, className, onCardHover, onCardLeave}:FavoritesCardListProps) {
   return(
     <ul className="favorites__list">
-      {CITIES.map((city)=> {
-        const currentCityOffers = offers.filter((offer)=> offer.city.name === city && offer.isFavorite);
+      {CITIES.map((city) => {
+        const currentCityOffers = offers.filter((offer) => offer.city.name === city && offer.isFavorite);
         if(currentCityOffers.length > 0){
           return(
-            <li key = {city} className="favorites__locations-items">
+            <li key={city} className="favorites__locations-items">
               <div className="favorites__locations locations locations--current">
                 <div className="locations__item">
                   <a className="locations__item-link" href="#!">
@@ -29,6 +31,8 @@ function FavoritesCardList({offers, className}:FavoritesCardListProps) {
                     key={offer.id}
                     offer={offer}
                     className={className}
+                    onCardHover={onCardHover}
+                    onCardLeave={onCardLeave}
                   />
                 ))}
               </div>

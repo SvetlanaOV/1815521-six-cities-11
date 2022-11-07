@@ -1,9 +1,12 @@
 import {Link} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
+import {useState} from 'react';
 import {AppRoute} from '../../components/const';
 import CardList from '../../components/card-list/card-list';
+import Map from '../../components/map/map';
 import {CardClassName} from '../../components/const';
 import {Offer} from '../../types/offer';
+import { cities } from '../../mocks/cities';
 
 type MainPageProps = {
   offersCount: number;
@@ -11,6 +14,20 @@ type MainPageProps = {
 }
 
 function MainPage({offersCount, offers}: MainPageProps): JSX.Element {
+  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
+    undefined
+  );
+
+  const onCardHover = (cardOfferId: number) => {
+    const currentOffer = offers.find((offer) => offer.id === cardOfferId);
+
+    setSelectedOffer(currentOffer);
+  };
+
+  const onCardLeave = () => {
+    setSelectedOffer(undefined);
+  };
+
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -104,11 +121,11 @@ function MainPage({offersCount, offers}: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <CardList offers = {offers} className={CardClassName.Cities}/>
+                <CardList offers={offers} className={CardClassName.Cities} onCardHover={onCardHover} onCardLeave={onCardLeave}/>
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map offers={offers} className='cities' city={cities[3]} selectedOffer={selectedOffer}/>
             </div>
           </div>
         </div>

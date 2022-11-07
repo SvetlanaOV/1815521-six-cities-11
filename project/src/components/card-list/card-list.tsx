@@ -1,4 +1,4 @@
-import {useState, Fragment} from 'react';
+import {Fragment} from 'react';
 import Card from '../card/card';
 import {Offer} from '../../types/offer';
 import {CardClassName} from '../../components/const';
@@ -6,10 +6,11 @@ import {CardClassName} from '../../components/const';
 type CardListProps = {
   offers: Offer[];
   className: CardClassName;
+  onCardHover: (id: number) => void;
+  onCardLeave: (id: number) => void;
 }
 
-function CardList ({offers, className}: CardListProps): JSX.Element {
-  const [, setIsActiveCard] = useState(0);
+function CardList({offers, className, onCardHover, onCardLeave}: CardListProps): JSX.Element {
   return (
     <Fragment>
       {offers.map((offer) => (
@@ -17,7 +18,8 @@ function CardList ({offers, className}: CardListProps): JSX.Element {
           key={offer.id}
           offer={offer}
           className={className}
-          onMouseOver={() => setIsActiveCard(offer.id)}
+          onCardHover={onCardHover}
+          onCardLeave={onCardLeave}
         />
       ))}
     </Fragment>
