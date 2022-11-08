@@ -41,3 +41,19 @@ export const REVIEW_STAR_RATING = [
     title: 'terribly'
   },
 ];
+
+export enum UrlMapMarker {
+  Default = '../../img/pin.svg',
+  Active = '../../img/pin-active.svg',
+}
+
+export enum MapMarker {
+  Width = 40,
+  Height = 40,
+}
+
+export enum MapMarkerAnchor {
+  Width = 20,
+  Height = 40,
+}
+

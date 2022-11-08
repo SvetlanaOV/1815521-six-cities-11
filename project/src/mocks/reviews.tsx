@@ -15,7 +15,7 @@ export const reviews: Review[] = [
   },
   {
     comment: 'A quiet cozy and picturesque.',
-    date: 'Sat Oct 29 2022 07:20:33 GMT+0200 (Центральная Африка)',
+    date: 'Sat Nov 29 2022 07:20:33 GMT+0200 (Центральная Африка)',
     id: 2,
     rating: 2,
     user: {
@@ -27,7 +27,7 @@ export const reviews: Review[] = [
   },
   {
     comment: 'A quiet cozy and picturesque.',
-    date: 'Sat Oct 29 2022 09:20:33 GMT+0200 (Центральная Африка)',
+    date: 'Sat Dec 20 2022 09:20:33 GMT+0200 (Центральная Африка)',
     id: 3,
     rating: 5,
     user: {
