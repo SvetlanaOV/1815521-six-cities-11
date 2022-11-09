@@ -3,7 +3,7 @@ import {Review} from '../types/review';
 export const reviews: Review[] = [
   {
     comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-    date: 'Sat Oct 29 2022 09:20:33 GMT+0200 (Центральная Африка)',
+    date: 'Sat Dec 29 2022 09:20:33 GMT+0200 (Центральная Африка)',
     id: 1,
     rating: 4,
     user: {
@@ -27,14 +27,26 @@ export const reviews: Review[] = [
   },
   {
     comment: 'A quiet cozy and picturesque.',
-    date: 'Sat Dec 20 2022 09:20:33 GMT+0200 (Центральная Африка)',
+    date: 'Sat Dec 30 2022 09:20:33 GMT+0200 (Центральная Африка)',
     id: 3,
     rating: 5,
     user: {
       avatarUrl: 'img/avatar-angelina.jpg',
-      id: 1,
+      id: 3,
       isPro: false,
       name: 'Max'
+    }
+  },
+  {
+    comment: 'A quiet place',
+    date: 'Sat Dec 29 2022 09:20:33 GMT+0200 (Центральная Африка)',
+    id: 4,
+    rating: 4,
+    user: {
+      avatarUrl: 'img/avatar-max.jpg',
+      id: 4,
+      isPro: false,
+      name: 'Oliver.conner'
     }
   },
 ];

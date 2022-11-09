@@ -3,13 +3,12 @@ import {useRef, useEffect} from 'react';
 import {Marker, Icon} from 'leaflet';
 import useMap from '../../hooks/useMap';
 import {UrlMapMarker, MapMarker, MapMarkerAnchor} from '../const';
-import {City} from '../../types/city';
 import {Offer} from '../../types/offer';
 
 type MapProps = {
   offers: Offer[];
   className: string;
-  city: City;
+  city: string;
   selectedOffer: Offer | undefined;
 };
 
@@ -49,7 +48,7 @@ export function Map({className, offers, city, selectedOffer}: MapProps): JSX.Ele
     }
   }, [map, offers, selectedOffer]);
 
-  return <section className={`${className}__map map`} ref={mapRef}></section>;
+  return <section className={`${className} map`} ref={mapRef}></section>;
 }
 
 export default Map;

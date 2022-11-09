@@ -56,4 +56,3 @@ export enum MapMarkerAnchor {
   Width = 20,
   Height = 40,
 }
-
