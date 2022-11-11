@@ -1,5 +1,4 @@
 import {Link} from 'react-router-dom';
-import {useState} from 'react';
 import {Offer} from '../../types/offer';
 import {CardClassName} from '../../components/const';
 
@@ -7,20 +6,19 @@ type CardProps = {
   offer: Offer;
   className: CardClassName;
   onCardHover: (id: number) => void;
-  onCardLeave: (id: number) => void;
+  onCardLeave: () => void;
 }
 
 function Card({offer, className, onCardHover, onCardLeave}: CardProps) {
   const {id, previewImage, isPremium, price, rating, title, type} = offer;
 
-  const [cardState] = useState(id);
-  const cardActiveHandle = () => (onCardHover(cardState));
-  const test = () => (onCardLeave(cardState));
+  const cardActiveHandle = () => (onCardHover(id));
+  const cardLeaveHandler = () => (onCardLeave());
 
   return(
     <article key={id} className={`${className}__card place-card`}
       onMouseOver={cardActiveHandle}
-      onMouseLeave={test}
+      onMouseLeave={cardLeaveHandler}
     >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>

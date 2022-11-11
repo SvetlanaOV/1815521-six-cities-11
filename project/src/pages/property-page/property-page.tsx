@@ -3,8 +3,9 @@ import {AppRoute} from '../../components/const';
 import Logo from '../../components/logo/logo';
 import CardList from '../../components/card-list/card-list';
 import {CardClassName} from '../../components/const';
-import ReviewItem from '../../components/review-item/review-item';
+import ReviewList from '../../components/review-list.tsx/review-list';
 import ReviewForm from '../../components/review-form/review-form';
+import Map from '../../components/map/map';
 import {Review} from '../../types/review';
 import {Offer} from '../../types/offer';
 
@@ -24,7 +25,7 @@ function PropertyPage({reviews, offers}: PropertyPageProps): JSX.Element {
     );
   }
 
-  const {images, id, title, isPremium, rating, type, bedrooms, maxAdults, goods,price, host, description} = offer;
+  const {images, title, isPremium, rating, type, bedrooms, maxAdults, goods,price, host, description} = offer;
 
   const nearOffers = offers.filter((item) => item.id !== offer.id);
 
@@ -61,7 +62,7 @@ function PropertyPage({reviews, offers}: PropertyPageProps): JSX.Element {
             <div className="property__gallery">
               {
                 images.map((image) => (
-                  <div className="property__image-wrapper" key={id}>
+                  <div className="property__image-wrapper" key={image}>
                     <img className="property__image" src={image} alt="studio" />
                   </div>
                 ))
@@ -129,20 +130,12 @@ function PropertyPage({reviews, offers}: PropertyPageProps): JSX.Element {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-                  {reviews.map((review) => (
-                    <ReviewItem
-                      key={review.id}
-                      review={review}
-                    />
-                  ))}
-                </ul>
+                <ReviewList reviews={reviews}/>
                 <ReviewForm />
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <Map offers={offers} className='property__map' city={offer.city.name} selectedOffer={offer}/>
         </section>
         <div className="container">
           <section className="near-places places">

@@ -6,7 +6,7 @@ import CardList from '../../components/card-list/card-list';
 import Map from '../../components/map/map';
 import {CardClassName} from '../../components/const';
 import {Offer} from '../../types/offer';
-import { cities } from '../../mocks/cities';
+import {cities} from '../../mocks/cities';
 
 type MainPageProps = {
   offersCount: number;
@@ -125,7 +125,7 @@ function MainPage({offersCount, offers}: MainPageProps): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <Map offers={offers} className='cities' city={cities[3]} selectedOffer={selectedOffer}/>
+              <Map offers={offers} className='cities' city={cities[3].name} selectedOffer={selectedOffer}/>
             </div>
           </div>
         </div>

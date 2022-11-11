@@ -7,7 +7,7 @@ type CardListProps = {
   offers: Offer[];
   className: CardClassName;
   onCardHover: (id: number) => void;
-  onCardLeave: (id: number) => void;
+  onCardLeave: () => void;
 }
 
 function CardList({offers, className, onCardHover, onCardLeave}: CardListProps): JSX.Element {

@@ -7,7 +7,7 @@ type FavoritesCardListProps = {
   offers: Offer[];
   className: CardClassName;
   onCardHover: (id: number) => void;
-  onCardLeave: (id: number) => void;
+  onCardLeave: () => void;
 }
 
 function FavoritesCardList({offers, className, onCardHover, onCardLeave}:FavoritesCardListProps) {
