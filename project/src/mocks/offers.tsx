@@ -5,13 +5,13 @@ export const offers: Offer[] = [
     bedrooms: 1,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 53.551086,
+        longitude: 9.993682,
         zoom: 30
       },
-      name: 'Amsterdam'
+      name: 'Hamburg'
     },
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Berlin.',
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Hamburg.',
     goods: [
       'Heating',
       'Wi-Fi'
@@ -29,8 +29,8 @@ export const offers: Offer[] = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 52.3809553943508,
-      longitude: 4.939309666406198,
+      latitude: 53.551086,
+      longitude: 9.993682,
       zoom: 20
     },
     maxAdults: 4,
@@ -44,11 +44,11 @@ export const offers: Offer[] = [
     bedrooms: 1,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 48.864716,
+        longitude: 2.349014,
         zoom: 30
       },
-      name: 'Amsterdam'
+      name: 'Paris'
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Berlin.',
     goods: [
@@ -68,8 +68,8 @@ export const offers: Offer[] = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 52.3609553943508,
-      longitude: 4.85309666406198,
+      latitude: 48.864716,
+      longitude: 2.349014,
       zoom: 20
     },
     maxAdults: 4,

@@ -4,11 +4,12 @@ import {Marker, Icon} from 'leaflet';
 import useMap from '../../hooks/useMap';
 import {UrlMapMarker, MapMarker, MapMarkerAnchor} from '../const';
 import {Offer} from '../../types/offer';
+//import {City} from '../../types/city';
 
 type MapProps = {
   offers: Offer[];
-  className: string;
   city: string;
+  className: string;
   selectedOffer: Offer | undefined;
 };
 
@@ -24,8 +25,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [MapMarkerAnchor.Height, MapMarkerAnchor.Width],
 });
 
-
-export function Map({className, offers, city, selectedOffer}: MapProps): JSX.Element {
+function Map({className, offers, city, selectedOffer}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 

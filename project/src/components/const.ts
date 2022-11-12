@@ -17,7 +17,9 @@ export enum CardClassName {
   Near = 'near-places',
 }
 
-export const CITIES = ['Tokio', 'Paris', 'Berlin', 'Amsterdam'];
+export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+export const DEFAULT_CITY = 'Paris';
 
 export const REVIEW_STAR_RATING = [
   {
