@@ -4,7 +4,6 @@ import {Marker, Icon} from 'leaflet';
 import useMap from '../../hooks/useMap';
 import {UrlMapMarker, MapMarker, MapMarkerAnchor} from '../const';
 import {Offer} from '../../types/offer';
-//import {City} from '../../types/city';
 
 type MapProps = {
   offers: Offer[];
