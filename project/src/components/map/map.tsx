@@ -7,8 +7,8 @@ import {Offer} from '../../types/offer';
 
 type MapProps = {
   offers: Offer[];
-  className: string;
   city: string;
+  className: string;
   selectedOffer: Offer | undefined;
 };
 
@@ -24,8 +24,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [MapMarkerAnchor.Height, MapMarkerAnchor.Width],
 });
 
-
-export function Map({className, offers, city, selectedOffer}: MapProps): JSX.Element {
+function Map({className, offers, city, selectedOffer}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 

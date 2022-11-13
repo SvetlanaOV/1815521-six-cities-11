@@ -12,13 +12,13 @@ type CardProps = {
 function Card({offer, className, onCardHover, onCardLeave}: CardProps) {
   const {id, previewImage, isPremium, price, rating, title, type} = offer;
 
-  const cardActiveHandle = () => (onCardHover(id));
-  const cardLeaveHandler = () => (onCardLeave());
+  const handleCardActive = () => (onCardHover(id));
+  const handleCardLeave = () => (onCardLeave());
 
   return(
     <article key={id} className={`${className}__card place-card`}
-      onMouseOver={cardActiveHandle}
-      onMouseLeave={cardLeaveHandler}
+      onMouseOver={handleCardActive}
+      onMouseLeave={handleCardLeave}
     >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
