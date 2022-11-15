@@ -7,3 +7,6 @@ export const changeCity = createAction('offers/changeCity', (city: string) => ({
 export const updateOffers = createAction('offers/updateOffers', (offers: Offer[]) => ({
   payload: offers,
 }));
+export const changeSortType = createAction('offers/changeSortType', (sortType: string) => ({
+  payload: sortType,
+}));

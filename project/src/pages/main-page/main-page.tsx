@@ -6,12 +6,17 @@ import {AppRoute} from '../../components/const';
 import CardList from '../../components/card-list/card-list';
 import CityList from '../../components/city-list/city-list';
 import Map from '../../components/map/map';
+import SortForm from '../../components/sort-form/sort-form';
 import {CardClassName} from '../../components/const';
 import {Offer} from '../../types/offer';
 import {CITIES} from '../../components/const';
+import {sortByOption} from '../../utils';
 
 function MainPage(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const activeSortType = useAppSelector((state) => state.sortType);
+  const activeOffers = useAppSelector((state) => state.offers);
+  const offers = sortByOption([...activeOffers], activeSortType);
+
   const currentCity = useAppSelector((state) => state.city);
   const currentCityOffers = offers.filter((offer) => offer.city.name === currentCity);
 
@@ -75,21 +80,7 @@ function MainPage(): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{`${currentCityOffers.length} places to stay in ${currentCity}`}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
-              </form>
+              <SortForm />
               <div className="cities__places-list places__list tabs__content">
                 <CardList offers={currentCityOffers} className={CardClassName.Cities} onCardHover={onCardHover} onCardLeave={onCardLeave}/>
               </div>
