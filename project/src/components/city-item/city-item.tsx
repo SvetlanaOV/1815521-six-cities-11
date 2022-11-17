@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import cn from 'classnames';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {changeCity} from '../../store/action';
@@ -13,7 +14,7 @@ function CityItem({city}: CityItemProps): JSX.Element {
 
   return (
     <li className="locations__item">
-      <Link className={`locations__item-link tabs__item ${currentCity === city ? 'tabs__item--active' : ''}`}
+      <Link className={cn('locations__item-link', 'tabs__item', {'tabs__item--active' : currentCity === city })}
         to={'/'}
         onClick={() => dispatch(changeCity(city))}
       >

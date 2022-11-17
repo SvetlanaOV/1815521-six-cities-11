@@ -21,6 +21,15 @@ export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', '
 
 export const DEFAULT_CITY = 'Paris';
 
+export const DEFAULT_SORT_TYPE = 'Popular';
+
+export enum SortType {
+  Popular = 'Popular',
+  LowToHigh = 'Price: low to high',
+  HighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first',
+}
+
 export const REVIEW_STAR_RATING = [
   {
     starNumber: 5,
