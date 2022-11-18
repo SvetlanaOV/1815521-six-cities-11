@@ -8,15 +8,8 @@ import LoginPage from '../../pages/login-page/login-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PropertyPage from '../../pages/property-page/property-page';
 import PrivateRoute from '../../components/private-route/private-route';
-import {Offer} from '../../types/offer';
-import {Review} from '../../types/review';
 
-type AppScreenProps = {
-  offers: Offer[];
-  reviews: Review[];
-}
-
-function App({offers, reviews}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -36,13 +29,13 @@ function App({offers, reviews}: AppScreenProps): JSX.Element {
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.Auth}
               >
-                <FavoritesPage offers={offers}/>
+                <FavoritesPage />
               </PrivateRoute>
             }
           />
           <Route
             path={`${AppRoute.Room}/:id`}
-            element={<PropertyPage reviews={reviews} offers={offers}/>}
+            element={<PropertyPage />}
           />
           <Route
             path="*"

@@ -1,4 +1,5 @@
 import {Link, useParams, Navigate} from 'react-router-dom';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import {AppRoute} from '../../components/const';
 import Logo from '../../components/logo/logo';
 import CardList from '../../components/card-list/card-list';
@@ -6,18 +7,15 @@ import {CardClassName} from '../../components/const';
 import ReviewList from '../../components/review-list.tsx/review-list';
 import ReviewForm from '../../components/review-form/review-form';
 import Map from '../../components/map/map';
-import {Review} from '../../types/review';
-import {Offer} from '../../types/offer';
 
-type PropertyPageProps = {
-  reviews: Review[];
-  offers: Offer[];
-}
-
-function PropertyPage({reviews, offers}: PropertyPageProps): JSX.Element {
+function PropertyPage(): JSX.Element {
   const params = useParams();
   const paramsId = Number(params.id);
+
+  const offers = useAppSelector((state) => state.offers);
   const offer = offers.find((item) => item.id === paramsId);
+
+  const reviews = useAppSelector((state) => state.reviews);
 
   if (!offer){
     return (

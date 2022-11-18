@@ -1,6 +1,6 @@
 import 'leaflet/dist/leaflet.css';
 import {useRef, useEffect} from 'react';
-import {Marker, Icon} from 'leaflet';
+import {Marker, Icon, LayerGroup} from 'leaflet';
 import useMap from '../../hooks/useMap';
 import {UrlMapMarker, MapMarker, MapMarkerAnchor} from '../const';
 import {Offer} from '../../types/offer';
@@ -29,8 +29,10 @@ function Map({className, offers, city, selectedOffer}: MapProps): JSX.Element {
   const map = useMap(mapRef, city);
 
   useEffect(() => {
+    const newLayer: LayerGroup = new LayerGroup();
+
     if (map) {
-      offers.forEach((offer) => {
+      offers?.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude,
@@ -42,9 +44,14 @@ function Map({className, offers, city, selectedOffer}: MapProps): JSX.Element {
               ? currentCustomIcon
               : defaultCustomIcon
           )
-          .addTo(map);
+          .addTo(newLayer);
       });
+      newLayer.addTo(map);
     }
+
+    return () => {
+      map?.removeLayer(newLayer);
+    };
   }, [map, offers, selectedOffer]);
 
   return <section className={`${className} map`} ref={mapRef}></section>;
