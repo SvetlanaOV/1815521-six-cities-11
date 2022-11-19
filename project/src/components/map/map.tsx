@@ -32,7 +32,7 @@ function Map({className, offers, city, selectedOffer}: MapProps): JSX.Element {
     const newLayer: LayerGroup = new LayerGroup();
 
     if (map) {
-      offers?.forEach((offer) => {
+      offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude,
