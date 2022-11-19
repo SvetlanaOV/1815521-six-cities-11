@@ -1,16 +1,15 @@
 import {Link} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
+import {useState} from 'react';
 import {AppRoute} from '../../components/const';
 import {Offer} from '../../types/offer';
 import {CardClassName} from '../../components/const';
 import Logo from '../../components/logo/logo';
 import FavoritesCardList from '../../components/favorites-card-list/favorites-card-list';
 
-type FavoritesPageProps = {
-  offers: Offer[];
-}
+function FavoritesPage(): JSX.Element {
+  const [offers] = useState<Offer[]>([]);
 
-function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
   return (
     <div className="page">
       <Helmet>

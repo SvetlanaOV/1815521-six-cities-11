@@ -8,11 +8,13 @@ import CityList from '../../components/city-list/city-list';
 import Map from '../../components/map/map';
 import SortForm from '../../components/sort-form/sort-form';
 import {CardClassName} from '../../components/const';
-import {Offer} from '../../types/offer';
 import {CITIES} from '../../components/const';
+import LoadingScreen from '../loading-screen/loading-screen';
+import {Offer} from '../../types/offer';
 import {sortByOption} from '../../utils';
 
 function MainPage(): JSX.Element {
+  //todo: Изменить сортировку с помощью UseMemo
   const activeSortType = useAppSelector((state) => state.sortType);
   const activeOffers = useAppSelector((state) => state.offers);
   const offers = sortByOption([...activeOffers], activeSortType);
@@ -33,6 +35,12 @@ function MainPage(): JSX.Element {
   const onCardLeave = () => {
     setSelectedOffer(undefined);
   };
+
+  const offerLoadingStatus = useAppSelector((state) => state.isOffersDataLoading);
+
+  if (offerLoadingStatus) {
+    return (<LoadingScreen />);
+  }
 
   return (
     <div className="page page--gray page--main">
@@ -86,7 +94,7 @@ function MainPage(): JSX.Element {
               </div>
             </section>
             <div className="cities__right-section">
-              <Map offers={offers} className='cities' city={currentCity} selectedOffer={selectedOffer}/>
+              <Map offers={currentCityOffers} className='cities' city={currentCity} selectedOffer={selectedOffer}/>
             </div>
           </div>
         </div>
