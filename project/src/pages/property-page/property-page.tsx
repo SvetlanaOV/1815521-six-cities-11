@@ -1,5 +1,5 @@
 import {Link, useParams, Navigate} from 'react-router-dom';
-import { useAppSelector } from '../../hooks/useAppSelector';
+import {useAppSelector} from '../../hooks/useAppSelector';
 import {AppRoute} from '../../components/const';
 import Logo from '../../components/logo/logo';
 import CardList from '../../components/card-list/card-list';
