@@ -1,6 +1,5 @@
 import {useEffect} from 'react';
-import {useParams, Navigate} from 'react-router-dom';
-//import {AppRoute} from '../../components/const';
+import {useParams} from 'react-router-dom';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {fetchCurrentOfferAction, fetchNearbyOffersAction} from '../../store/api-actions';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
@@ -28,11 +27,6 @@ function PropertyPage(): JSX.Element {
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
 
   const reviews = useAppSelector((state) => state.reviews);
-  const isDataLoaded = useAppSelector((state) => state.isOffersDataLoading);
-
-  if (isDataLoaded){
-    <Navigate replace to="/" />;
-  }
 
   if (!offer){
     return <LoadingScreen />;
