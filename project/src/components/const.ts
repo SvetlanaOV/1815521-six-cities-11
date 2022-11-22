@@ -3,6 +3,7 @@ export enum AppRoute {
   Favorites = '/favorites',
   Room = '/offer',
   Root = '/',
+  NotFound = '/404',
 }
 
 export enum APIRoute {
@@ -123,5 +124,7 @@ export enum MapMarkerAnchor {
   Width = 20,
   Height = 40,
 }
+
+export const PASSWORD_REG_EXP = '^(?=.*[0-9])(?=.*[A-Za-z])([A-Za-z0-9]+)$';
 
 export const TIMEOUT_SHOW_ERROR = 2000;
