@@ -27,7 +27,7 @@ export const fetchCurrentOfferAction = createAsyncThunk<void, string, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchPropertyOffer',
+  'data/fetchCurrentOffer',
   async (id, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
