@@ -1,11 +1,12 @@
 import {useEffect} from 'react';
 import {useParams, Navigate} from 'react-router-dom';
-import {AppRoute} from '../../components/const';
+//import {AppRoute} from '../../components/const';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {fetchCurrentOfferAction, fetchNearbyOffersAction} from '../../store/api-actions';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import Header from '../../components/header/header';
 import CardList from '../../components/card-list/card-list';
+import LoadingScreen from '../loading-screen/loading-screen';
 import {CardClassName} from '../../components/const';
 import ReviewList from '../../components/review-list.tsx/review-list';
 import ReviewForm from '../../components/review-form/review-form';
@@ -27,11 +28,14 @@ function PropertyPage(): JSX.Element {
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
 
   const reviews = useAppSelector((state) => state.reviews);
+  const isDataLoaded = useAppSelector((state) => state.isOffersDataLoading);
+
+  if (isDataLoaded){
+    <Navigate replace to="/" />;
+  }
 
   if (!offer){
-    return (
-      <Navigate replace to={AppRoute.NotFound} />
-    );
+    return <LoadingScreen />;
   }
 
   const {images, title, isPremium, rating, type, bedrooms, maxAdults, goods,price, host, description} = offer;

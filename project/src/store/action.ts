@@ -28,6 +28,4 @@ export const setOffersDataLoadingStatus = createAction('offers/setOffersDataLoad
   payload: offersDataLoadingStatus,
 }));
 
-export const setError = createAction<string | null>('offers/setError');
-
 export const redirectToRoute = createAction<AppRoute>('user/redirectToRoute');

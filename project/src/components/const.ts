@@ -126,5 +126,3 @@ export enum MapMarkerAnchor {
 }
 
 export const PASSWORD_REG_EXP = '^(?=.*[0-9])(?=.*[A-Za-z])([A-Za-z0-9]+)$';
-
-export const TIMEOUT_SHOW_ERROR = 2000;
