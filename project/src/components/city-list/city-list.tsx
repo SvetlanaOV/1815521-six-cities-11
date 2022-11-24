@@ -1,14 +1,10 @@
 import CityItem from '../../components/city-item/city-item';
-import {City} from '../../types/city';
+import {CITIES} from '../const';
 
-type CityListProps = {
-  cities: City[];
-}
-
-function CityList({cities}: CityListProps) {
+function CityList() {
   return (
     <ul className="locations__list tabs__list">
-      {cities.map((city) => <CityItem city={city.name} key={city.name}/>)}
+      {CITIES.map((city) => <CityItem city={city.name} key={city.name}/>)}
     </ul>
   );
 }

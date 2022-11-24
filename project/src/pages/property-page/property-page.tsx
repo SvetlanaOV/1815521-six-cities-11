@@ -1,58 +1,42 @@
-import {Link, useParams, Navigate} from 'react-router-dom';
+import {useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 import {useAppSelector} from '../../hooks/useAppSelector';
-import {AppRoute} from '../../components/const';
-import Logo from '../../components/logo/logo';
+import {fetchCurrentOfferAction, fetchNearbyOffersAction} from '../../store/api-actions';
+import {useAppDispatch} from '../../hooks/useAppDispatch';
+import Header from '../../components/header/header';
 import CardList from '../../components/card-list/card-list';
+import LoadingScreen from '../loading-screen/loading-screen';
 import {CardClassName} from '../../components/const';
 import ReviewList from '../../components/review-list.tsx/review-list';
 import ReviewForm from '../../components/review-form/review-form';
 import Map from '../../components/map/map';
 
 function PropertyPage(): JSX.Element {
-  const params = useParams();
-  const paramsId = Number(params.id);
+  const {id} = useParams();
 
-  const offers = useAppSelector((state) => state.offers);
-  const offer = offers.find((item) => item.id === paramsId);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchCurrentOfferAction(id));
+      dispatch(fetchNearbyOffersAction(id));
+    }
+  }, [id, dispatch]);
+
+  const offer = useAppSelector((state) => state.currentOffer);
+  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
 
   const reviews = useAppSelector((state) => state.reviews);
 
   if (!offer){
-    return (
-      <Navigate replace to="/" />
-    );
+    return <LoadingScreen />;
   }
 
   const {images, title, isPremium, rating, type, bedrooms, maxAdults, goods,price, host, description} = offer;
 
-  const nearOffers = offers.filter((item) => item.id !== offer.id);
-
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <Logo />
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </Link>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#!">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="page__main page__main--property">
         <section className="property">
@@ -133,13 +117,13 @@ function PropertyPage(): JSX.Element {
               </section>
             </div>
           </div>
-          <Map offers={offers} className='property__map' city={offer.city.name} selectedOffer={offer}/>
+          <Map offers={nearbyOffers.concat(offer)} className='property__map' city={offer.city.name} selectedOffer={offer}/>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <CardList offers={nearOffers} className={CardClassName.Near} onCardHover={() => null} onCardLeave={() => null}/>
+              <CardList offers={nearbyOffers} className={CardClassName.Near} onCardHover={() => null} onCardLeave={() => null}/>
             </div>
           </section>
         </div>
