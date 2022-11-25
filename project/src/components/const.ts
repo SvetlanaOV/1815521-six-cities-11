@@ -111,7 +111,7 @@ export const REVIEW_STAR_RATING = [
   },
 ];
 
-export const REVIEW_STAR_WIDTH = 20;
+export const REVIEW_STAR_WIDTH = 100 / 5;
 
 export enum UrlMapMarker {
   Default = '../../img/pin.svg',
@@ -129,3 +129,7 @@ export enum MapMarkerAnchor {
 }
 
 export const PASSWORD_REG_EXP = '^(?=.*[0-9])(?=.*[A-Za-z])([A-Za-z0-9]+)$';
+
+export const MIN_REVIEW_LENGTH = 50;
+
+export const MAX_REVIEW_LENGTH = 300;

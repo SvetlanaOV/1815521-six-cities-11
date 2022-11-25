@@ -1,5 +1,5 @@
 import {useState, ChangeEvent, FormEvent, Fragment} from 'react';
-import {REVIEW_STAR_RATING} from '../../components/const';
+import {REVIEW_STAR_RATING, MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH} from '../../components/const';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {ReviewData} from '../../types/review';
@@ -24,10 +24,14 @@ function ReviewForm(): JSX.Element {
 
   const currentOffer = useAppSelector((state) => state.currentOffer);
 
+  const isFormValid = formData.rating !== null && formData.comment.length > MIN_REVIEW_LENGTH && formData.comment.length < MAX_REVIEW_LENGTH;
+
+  const isFormDisabled = !isFormValid;
+
   const reviewFormSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if(currentOffer) {
+    if(currentOffer && isFormValid) {
       onSubmit({
         id: currentOffer.id,
         comment: formData.comment,
@@ -58,7 +62,7 @@ function ReviewForm(): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit">Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={isFormDisabled}>Submit</button>
       </div>
     </form>
   );
