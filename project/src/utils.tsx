@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import {Offer} from './types/offer';
 import {SortType} from './components/const';
 
@@ -16,3 +17,4 @@ export const sortByOption = (offers: Offer[], activeSortType: string) => {
   }
 };
 
+export const humanizeDate = (date: string) => dayjs(date).format('MMMM YYYY');

@@ -8,6 +8,7 @@ export enum AppRoute {
 
 export enum APIRoute {
   Offers = '/hotels',
+  Reviews = '/comments',
   Login = '/login',
   Logout = '/logout',
 }
@@ -109,6 +110,8 @@ export const REVIEW_STAR_RATING = [
     title: 'terribly'
   },
 ];
+
+export const REVIEW_STAR_WIDTH = 20;
 
 export enum UrlMapMarker {
   Default = '../../img/pin.svg',

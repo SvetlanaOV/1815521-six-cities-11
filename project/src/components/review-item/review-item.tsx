@@ -1,14 +1,13 @@
-import dayjs from 'dayjs';
+import {humanizeDate} from '../../utils';
 import {Review} from '../../types/review';
-
-const humanizeDate = (date: string) => dayjs(date).format('MMMM YYYY');
+import {REVIEW_STAR_WIDTH} from '../const';
 
 type ReviewItemProps = {
   review: Review;
 }
 
 function ReviewItem({review}: ReviewItemProps): JSX.Element {
-  const {comment, date, user} = review;
+  const {comment, date, user, rating} = review;
 
   const reviewDate = humanizeDate(date);
 
@@ -25,14 +24,14 @@ function ReviewItem({review}: ReviewItemProps): JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: '80%'}}></span>
+            <span style={{width: `${Math.round(rating) * REVIEW_STAR_WIDTH}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime={reviewDate}>{reviewDate}</time>
+        <time className="reviews__time" dateTime={date}>{reviewDate}</time>
       </div>
     </li>
   );

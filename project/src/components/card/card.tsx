@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom';
+import cn from 'classnames';
 import {Offer} from '../../types/offer';
-import {CardClassName} from '../../components/const';
+import {CardClassName, REVIEW_STAR_WIDTH} from '../../components/const';
 
 type CardProps = {
   offer: Offer;
@@ -10,7 +11,7 @@ type CardProps = {
 }
 
 function Card({offer, className, onCardHover, onCardLeave}: CardProps) {
-  const {id, previewImage, isPremium, price, rating, title, type} = offer;
+  const {id, previewImage, isPremium, isFavorite, price, rating, title, type} = offer;
 
   const handleCardActive = () => (onCardHover(id));
   const handleCardLeave = () => (onCardLeave());
@@ -32,7 +33,7 @@ function Card({offer, className, onCardHover, onCardLeave}: CardProps) {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+          <button className={cn('place-card__bookmark-button', {'place-card__bookmark-button--active' : isFavorite}, 'button')} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -41,7 +42,7 @@ function Card({offer, className, onCardHover, onCardLeave}: CardProps) {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: '80%'}}></span>
+            <span style={{width: `${Math.round(rating) * REVIEW_STAR_WIDTH}%`}}></span>
             <span className="visually-hidden">{rating}</span>
           </div>
         </div>

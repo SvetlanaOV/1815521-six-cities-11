@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {useAppSelector} from '../../hooks/useAppSelector';
-import {fetchCurrentOfferAction, fetchNearbyOffersAction} from '../../store/api-actions';
+import {fetchCurrentOfferAction, fetchNearbyOffersAction, fetchReviewListAction} from '../../store/api-actions';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import Header from '../../components/header/header';
 import CardList from '../../components/card-list/card-list';
@@ -10,26 +10,35 @@ import {CardClassName} from '../../components/const';
 import ReviewList from '../../components/review-list.tsx/review-list';
 import ReviewForm from '../../components/review-form/review-form';
 import Map from '../../components/map/map';
+import {AuthorizationStatus, REVIEW_STAR_WIDTH} from '../../components/const';
+import NotFoundPage from '../not-found-page/not-found-page';
 
 function PropertyPage(): JSX.Element {
   const {id} = useParams();
-
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (id) {
-      dispatch(fetchCurrentOfferAction(id));
-      dispatch(fetchNearbyOffersAction(id));
-    }
-  }, [id, dispatch]);
 
   const offer = useAppSelector((state) => state.currentOffer);
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
 
   const reviews = useAppSelector((state) => state.reviews);
 
-  if (!offer){
-    return <LoadingScreen />;
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchCurrentOfferAction(id));
+      dispatch(fetchNearbyOffersAction(id));
+      dispatch(fetchReviewListAction(id));
+    }
+  }, [id, dispatch]);
+
+  if(isOffersDataLoading) {
+    return <LoadingScreen/>;
+  }
+
+  if(!offer) {
+    return <NotFoundPage/>;
   }
 
   const {images, title, isPremium, rating, type, bedrooms, maxAdults, goods,price, host, description} = offer;
@@ -67,7 +76,7 @@ function PropertyPage(): JSX.Element {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: '80%'}}></span>
+                  <span style={{width: `${Math.round(rating) * REVIEW_STAR_WIDTH}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{rating}</span>
@@ -113,7 +122,7 @@ function PropertyPage(): JSX.Element {
               </div>
               <section className="property__reviews reviews">
                 <ReviewList reviews={reviews}/>
-                <ReviewForm />
+                {(authorizationStatus === AuthorizationStatus.Auth) ? <ReviewForm/> : ''}
               </section>
             </div>
           </div>
