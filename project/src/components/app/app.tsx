@@ -3,7 +3,6 @@ import {HelmetProvider} from 'react-helmet-async';
 import {AppRoute} from '../../components/const';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import {useAppSelector} from '../../hooks/useAppSelector';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import LoginPage from '../../pages/login-page/login-page';
@@ -15,13 +14,6 @@ import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-
-  if (isOffersDataLoading) {
-    return (
-      <LoadingScreen />
-    );
-  }
 
   return (
     <HelmetProvider>

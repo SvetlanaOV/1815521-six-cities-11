@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {changeCity, loadOffers, loadCurrentOffer, loadNearbyOffers, changeSortType, requireAuthorization, setOffersDataLoadingStatus, loadReviews} from './action';
+import {changeCity, loadOffers, loadCurrentOffer, loadNearbyOffers, changeSortType, requireAuthorization, setOffersDataLoadingStatus, loadReviewList, sendNewReview} from './action';
 import {DEFAULT_CITY, DEFAULT_SORT_TYPE, AuthorizationStatus} from '../components/const';
 import {Offer} from '../types/offer';
 import {Review} from '../types/review';
@@ -36,13 +36,16 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
     })
+    .addCase(sendNewReview, (state, action) => {
+      state.reviews = action.payload;
+    })
     .addCase(loadCurrentOffer, (state, action) => {
       state.currentOffer = action.payload;
     })
     .addCase(loadNearbyOffers, (state, action) => {
       state.nearbyOffers = action.payload;
     })
-    .addCase(loadReviews, (state, action) => {
+    .addCase(loadReviewList, (state, action) => {
       state.reviews = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {

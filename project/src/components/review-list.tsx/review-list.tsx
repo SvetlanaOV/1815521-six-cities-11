@@ -3,11 +3,11 @@ import {Fragment} from 'react';
 import {Review} from '../../types/review';
 import ReviewItem from '../review-item/review-item';
 
-type ReviewItemProps = {
+type ReviewListProps = {
   reviews: Review[];
 }
 
-function ReviewList({reviews}: ReviewItemProps): JSX.Element {
+function ReviewList({reviews}: ReviewListProps): JSX.Element {
   return (
     <Fragment>
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>

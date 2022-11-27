@@ -15,7 +15,10 @@ export const loadCurrentOffer = createAction('data/loadCurrentOffer', (offer: Of
 export const loadNearbyOffers = createAction('data/loadNearbyOffers', (offers: Offer[]) => ({
   payload: offers,
 }));
-export const loadReviews = createAction('data/loadReviews', (reviews: Review[]) => ({
+export const loadReviewList = createAction('data/loadReviewList', (reviews: Review[]) => ({
+  payload: reviews,
+}));
+export const sendNewReview = createAction('data/sendNewReview', (reviews: Review[]) => ({
   payload: reviews,
 }));
 export const changeSortType = createAction('offers/changeSortType', (sortType: string) => ({
