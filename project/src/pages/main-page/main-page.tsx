@@ -1,5 +1,5 @@
 import {Helmet} from 'react-helmet-async';
-import {useState, useMemo} from 'react';
+import {useState, useMemo, useCallback} from 'react';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import Header from '../../components/header/header';
 import CardList from '../../components/card-list/card-list';
@@ -9,32 +9,39 @@ import SortForm from '../../components/sort-form/sort-form';
 import {CardClassName} from '../../components/const';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {Offer} from '../../types/offer';
-import {sortByOption} from '../../utils';
-import {getCity, getSortType} from '../../store/action-process/selectors';
-import {getOffers, getOffersLoadedData} from '../../store/data-process/selectors';
+import {SortType} from '../../components/const';
+import {getCity, getSortType, getOffersByCity} from '../../store/action-process/selectors';
+import {getOffersLoadedData} from '../../store/data-process/selectors';
 
 function MainPage(): JSX.Element {
-  //todo: Изменить сортировку с помощью UseMemo
   const activeSortType = useAppSelector(getSortType);
-  const activeOffers = useAppSelector(getOffers);
-
-  const offers = useMemo(() => sortByOption([...activeOffers], activeSortType), [activeOffers, activeSortType]);
+  const offers = useAppSelector(getOffersByCity);
 
   const currentCity = useAppSelector(getCity);
-  const currentCityOffers = offers.filter((offer) => offer.city.name === currentCity);
+
+  const getSortedOffers = useCallback((currentSortType: string) => {
+    switch (currentSortType) {
+      case SortType.Popular:
+        return offers;
+      case SortType.LowToHigh:
+        return offers.sort((offerA, offerB) => offerA.price - offerB.price);
+      case SortType.HighToLow:
+        return offers.sort((offerA, offerB) => offerB.price - offerA.price);
+      case SortType.TopRatedFirst:
+        return offers.sort((offerA, offerB) => offerB.rating - offerA.rating);
+    }
+  }, [offers]);
+
+  const sortedOffers = useMemo(() => getSortedOffers(activeSortType), [activeSortType, getSortedOffers]);
 
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
     undefined
   );
 
-  const onCardHover = (cardOfferId: number) => {
+  const handleCardHover = (cardOfferId: number) => {
     const currentOffer = offers.find((offer) => offer.id === cardOfferId);
 
     setSelectedOffer(currentOffer);
-  };
-
-  const onCardLeave = () => {
-    setSelectedOffer(undefined);
   };
 
   const offerLoadingStatus = useAppSelector(getOffersLoadedData);
@@ -61,14 +68,14 @@ function MainPage(): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{`${currentCityOffers.length} places to stay in ${currentCity}`}</b>
+              <b className="places__found">{`${offers.length} places to stay in ${currentCity}`}</b>
               <SortForm />
               <div className="cities__places-list places__list tabs__content">
-                <CardList offers={currentCityOffers} className={CardClassName.Cities} onCardHover={onCardHover} onCardLeave={onCardLeave}/>
+                <CardList offers={sortedOffers as Offer[]} className={CardClassName.Cities} onCardHover={handleCardHover} />
               </div>
             </section>
             <div className="cities__right-section">
-              <Map offers={currentCityOffers} className='cities' city={currentCity} selectedOffer={selectedOffer}/>
+              <Map offers={offers} className='cities' city={currentCity} selectedOffer={selectedOffer}/>
             </div>
           </div>
         </div>

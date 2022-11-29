@@ -6,11 +6,11 @@ import {CardClassName} from '../../components/const';
 type CardListProps = {
   offers: Offer[];
   className: CardClassName;
-  onCardHover: (id: number) => void;
-  onCardLeave: () => void;
+  onCardHover?: (id: number) => void;
 }
 
-function CardList({offers, className, onCardHover, onCardLeave}: CardListProps): JSX.Element {
+function CardList({offers, className, onCardHover}: CardListProps): JSX.Element {
+
   return (
     <Fragment>
       {offers.map((offer) => (
@@ -19,7 +19,6 @@ function CardList({offers, className, onCardHover, onCardLeave}: CardListProps):
           offer={offer}
           className={className}
           onCardHover={onCardHover}
-          onCardLeave={onCardLeave}
         />
       ))}
     </Fragment>

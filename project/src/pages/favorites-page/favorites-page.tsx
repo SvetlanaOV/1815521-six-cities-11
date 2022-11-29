@@ -21,7 +21,7 @@ function FavoritesPage(): JSX.Element {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesCardList offers={offers} className={CardClassName.Favorites} onCardHover={() => null} onCardLeave={() => null}/>
+            <FavoritesCardList offers={offers} className={CardClassName.Favorites} onCardHover={() => null} />
           </section>
         </div>
       </main>

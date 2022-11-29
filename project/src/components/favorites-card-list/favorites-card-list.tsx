@@ -7,10 +7,9 @@ type FavoritesCardListProps = {
   offers: Offer[];
   className: CardClassName;
   onCardHover: (id: number) => void;
-  onCardLeave: () => void;
 }
 
-function FavoritesCardList({offers, className, onCardHover, onCardLeave}:FavoritesCardListProps) {
+function FavoritesCardList({offers, className, onCardHover}:FavoritesCardListProps) {
   return(
     <ul className="favorites__list">
       {CITIES.map((city) => {
@@ -32,7 +31,6 @@ function FavoritesCardList({offers, className, onCardHover, onCardLeave}:Favorit
                     offer={offer}
                     className={className}
                     onCardHover={onCardHover}
-                    onCardLeave={onCardLeave}
                   />
                 ))}
               </div>

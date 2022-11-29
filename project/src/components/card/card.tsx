@@ -6,20 +6,15 @@ import {CardClassName, REVIEW_STAR_WIDTH} from '../../components/const';
 type CardProps = {
   offer: Offer;
   className: CardClassName;
-  onCardHover: (id: number) => void;
-  onCardLeave: () => void;
+  onCardHover?: (id: number) => void;
 }
 
-function Card({offer, className, onCardHover, onCardLeave}: CardProps) {
+function Card({offer, className, onCardHover}: CardProps) {
   const {id, previewImage, isPremium, isFavorite, price, rating, title, type} = offer;
-
-  const handleCardActive = () => (onCardHover(id));
-  const handleCardLeave = () => (onCardLeave());
 
   return(
     <article key={id} className={`${className}__card place-card`}
-      onMouseOver={handleCardActive}
-      onMouseLeave={handleCardLeave}
+      onMouseOver={onCardHover ? () => onCardHover(id) : undefined}
     >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
