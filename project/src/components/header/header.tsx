@@ -3,9 +3,10 @@ import Logo from '../logo/logo';
 import HeaderSingIn from '../header-sing-in/header-sing-in';
 import HeaderSingOut from '../header-sing-out/header-sing-out';
 import {useAppSelector} from '../../hooks/useAppSelector';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
 
 function Header(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return(
     <header className="header">

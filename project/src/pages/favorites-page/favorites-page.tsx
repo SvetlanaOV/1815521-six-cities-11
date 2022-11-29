@@ -5,9 +5,10 @@ import {CardClassName} from '../../components/const';
 import Header from '../../components/header/header';
 import FavoritesCardList from '../../components/favorites-card-list/favorites-card-list';
 import {useAppSelector} from '../../hooks/useAppSelector';
+import {getOffers} from '../../store/data-process/selectors';
 
 function FavoritesPage(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
 
   return (
     <div className="page">

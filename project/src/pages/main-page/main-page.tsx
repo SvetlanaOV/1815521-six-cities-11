@@ -1,5 +1,5 @@
 import {Helmet} from 'react-helmet-async';
-import {useState} from 'react';
+import {useState, useMemo} from 'react';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import Header from '../../components/header/header';
 import CardList from '../../components/card-list/card-list';
@@ -10,14 +10,17 @@ import {CardClassName} from '../../components/const';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {Offer} from '../../types/offer';
 import {sortByOption} from '../../utils';
+import {getCity, getSortType} from '../../store/action-process/selectors';
+import {getOffers, getOffersLoadedData} from '../../store/data-process/selectors';
 
 function MainPage(): JSX.Element {
   //todo: Изменить сортировку с помощью UseMemo
-  const activeSortType = useAppSelector((state) => state.sortType);
-  const activeOffers = useAppSelector((state) => state.offers);
-  const offers = sortByOption([...activeOffers], activeSortType);
+  const activeSortType = useAppSelector(getSortType);
+  const activeOffers = useAppSelector(getOffers);
 
-  const currentCity = useAppSelector((state) => state.city);
+  const offers = useMemo(() => sortByOption([...activeOffers], activeSortType), [activeOffers, activeSortType]);
+
+  const currentCity = useAppSelector(getCity);
   const currentCityOffers = offers.filter((offer) => offer.city.name === currentCity);
 
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
@@ -34,7 +37,7 @@ function MainPage(): JSX.Element {
     setSelectedOffer(undefined);
   };
 
-  const offerLoadingStatus = useAppSelector((state) => state.isOffersDataLoading);
+  const offerLoadingStatus = useAppSelector(getOffersLoadedData);
 
   if (offerLoadingStatus) {
     return (<LoadingScreen />);

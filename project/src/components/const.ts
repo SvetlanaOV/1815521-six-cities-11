@@ -13,6 +13,13 @@ export enum APIRoute {
   Logout = '/logout',
 }
 
+export enum NameSpace {
+  User = 'User',
+  Data = 'Data',
+  Action = 'Action',
+  Favorite = 'Favorite',
+}
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',

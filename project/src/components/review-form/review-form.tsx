@@ -4,6 +4,7 @@ import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {ReviewData} from '../../types/review';
 import {sendNewReviewAction} from '../../store/api-actions';
+import {getCurrentOffer} from '../../store/data-process/selectors';
 
 function ReviewForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -22,11 +23,11 @@ function ReviewForm(): JSX.Element {
     dispatch(sendNewReviewAction(reviewData));
   };
 
-  const currentOffer = useAppSelector((state) => state.currentOffer);
+  const currentOffer = useAppSelector(getCurrentOffer);
 
-  const isFormValid = formData.rating !== null && formData.comment.length > MIN_REVIEW_LENGTH && formData.comment.length < MAX_REVIEW_LENGTH;
+  const isFormValid = formData.rating !== '' && formData.comment.length > MIN_REVIEW_LENGTH && formData.comment.length < MAX_REVIEW_LENGTH;
 
-  const isFormDisabled = !isFormValid;
+  const isButtonDisabled = !isFormValid;
 
   const reviewFormSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -62,7 +63,7 @@ function ReviewForm(): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={isFormDisabled}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={isButtonDisabled}>Submit</button>
       </div>
     </form>
   );
