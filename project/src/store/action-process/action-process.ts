@@ -5,6 +5,7 @@ import {ActionProcess} from '../../types/state';
 const initialState: ActionProcess = {
   city: DEFAULT_CITY,
   sortType: DEFAULT_SORT_TYPE,
+  handlerStatus: true,
 };
 
 export const actionProcess = createSlice({

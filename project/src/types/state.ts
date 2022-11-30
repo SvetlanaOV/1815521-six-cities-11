@@ -13,11 +13,13 @@ export type DataProcess = {
   nearbyOffers: Offer[];
   reviews: Review[];
   isOffersDataLoading: boolean;
+  selectedOffer?: Offer;
 };
 
 export type ActionProcess = {
   city: string;
   sortType: string;
+  handlerStatus: boolean;
 };
 
 export type State = ReturnType<typeof store.getState>;

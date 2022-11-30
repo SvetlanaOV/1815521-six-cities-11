@@ -1,7 +1,8 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../../components/const';
 import {DataProcess} from '../../types/state';
 import {fetchOffersAction, fetchCurrentOfferAction, fetchNearbyOffersAction, fetchReviewListAction, sendNewReviewAction} from '../api-actions';
+import { Offer } from '../../types/offer';
 
 const initialState: DataProcess = {
   offers: [],
@@ -13,7 +14,11 @@ const initialState: DataProcess = {
 export const dataProcess = createSlice({
   name: NameSpace.Data,
   initialState,
-  reducers: {},
+  reducers: {
+    selectOffer: (state, action: PayloadAction<Offer | undefined>) => {
+      state.selectedOffer = action.payload;
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchOffersAction.pending, (state) => {
@@ -53,3 +58,5 @@ export const dataProcess = createSlice({
       });
   }
 });
+
+export const {selectOffer} = dataProcess.actions;
