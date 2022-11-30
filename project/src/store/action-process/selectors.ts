@@ -15,7 +15,7 @@ export const getOffersByCity = createSelector(
 );
 
 export const getSortedOffers = createSelector(
-  [getOffers, getSortType],
+  [getOffersByCity, getSortType],
   (offers, currentSortType) =>{
     switch (currentSortType) {
       case SortType.Popular:
