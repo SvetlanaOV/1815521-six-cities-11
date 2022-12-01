@@ -2,24 +2,23 @@ import {Link} from 'react-router-dom';
 import cn from 'classnames';
 import {Offer} from '../../types/offer';
 import {CardClassName, REVIEW_STAR_WIDTH} from '../../components/const';
+import {useAppDispatch} from '../../hooks/useAppDispatch';
+import {selectOffer} from '../../store/data-process/data-process';
 
 type CardProps = {
   offer: Offer;
   className: CardClassName;
-  onCardHover: (id: number) => void;
-  onCardLeave: () => void;
 }
 
-function Card({offer, className, onCardHover, onCardLeave}: CardProps) {
+function Card({offer, className}: CardProps) {
   const {id, previewImage, isPremium, isFavorite, price, rating, title, type} = offer;
 
-  const handleCardActive = () => (onCardHover(id));
-  const handleCardLeave = () => (onCardLeave());
+  const dispatch = useAppDispatch();
 
   return(
     <article key={id} className={`${className}__card place-card`}
-      onMouseOver={handleCardActive}
-      onMouseLeave={handleCardLeave}
+      onMouseOver={() => dispatch(selectOffer(offer))}
+      onMouseLeave={() => dispatch(selectOffer(undefined))}
     >
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>

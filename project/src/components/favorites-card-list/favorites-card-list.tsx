@@ -6,11 +6,9 @@ import {CITIES} from '../const';
 type FavoritesCardListProps = {
   offers: Offer[];
   className: CardClassName;
-  onCardHover: (id: number) => void;
-  onCardLeave: () => void;
 }
 
-function FavoritesCardList({offers, className, onCardHover, onCardLeave}:FavoritesCardListProps) {
+function FavoritesCardList({offers, className}:FavoritesCardListProps) {
   return(
     <ul className="favorites__list">
       {CITIES.map((city) => {
@@ -31,8 +29,6 @@ function FavoritesCardList({offers, className, onCardHover, onCardLeave}:Favorit
                     key={offer.id}
                     offer={offer}
                     className={className}
-                    onCardHover={onCardHover}
-                    onCardLeave={onCardLeave}
                   />
                 ))}
               </div>

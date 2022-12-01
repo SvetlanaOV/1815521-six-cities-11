@@ -12,18 +12,20 @@ import ReviewForm from '../../components/review-form/review-form';
 import Map from '../../components/map/map';
 import {AuthorizationStatus, REVIEW_STAR_WIDTH} from '../../components/const';
 import NotFoundPage from '../not-found-page/not-found-page';
+import { getCurrentOffer, getNearbyOffers, getOffersLoadedData, getReviews } from '../../store/data-process/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function PropertyPage(): JSX.Element {
   const {id} = useParams();
   const dispatch = useAppDispatch();
 
-  const offer = useAppSelector((state) => state.currentOffer);
-  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
+  const offer = useAppSelector(getCurrentOffer);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
 
-  const reviews = useAppSelector((state) => state.reviews);
+  const reviews = useAppSelector(getReviews);
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isOffersDataLoading = useAppSelector(getOffersLoadedData);
 
   useEffect(() => {
     if (id) {
@@ -33,7 +35,7 @@ function PropertyPage(): JSX.Element {
     }
   }, [id, dispatch]);
 
-  if(isOffersDataLoading) {
+  if(isOffersDataLoading || offer?.id !== Number(id)) {
     return <LoadingScreen/>;
   }
 
@@ -132,7 +134,7 @@ function PropertyPage(): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <CardList offers={nearbyOffers} className={CardClassName.Near} onCardHover={() => null} onCardLeave={() => null}/>
+              <CardList offers={nearbyOffers} className={CardClassName.Near} />
             </div>
           </section>
         </div>

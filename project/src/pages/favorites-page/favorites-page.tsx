@@ -5,9 +5,10 @@ import {CardClassName} from '../../components/const';
 import Header from '../../components/header/header';
 import FavoritesCardList from '../../components/favorites-card-list/favorites-card-list';
 import {useAppSelector} from '../../hooks/useAppSelector';
+import {getOffers} from '../../store/data-process/selectors';
 
 function FavoritesPage(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
 
   return (
     <div className="page">
@@ -20,7 +21,7 @@ function FavoritesPage(): JSX.Element {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesCardList offers={offers} className={CardClassName.Favorites} onCardHover={() => null} onCardLeave={() => null}/>
+            <FavoritesCardList offers={offers} className={CardClassName.Favorites} />
           </section>
         </div>
       </main>
