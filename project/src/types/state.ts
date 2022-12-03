@@ -14,6 +14,7 @@ export type DataProcess = {
   reviews: Review[];
   isOffersDataLoading: boolean;
   selectedOffer?: Offer;
+  favoriteOffers: Offer[];
 };
 
 export type ActionProcess = {
