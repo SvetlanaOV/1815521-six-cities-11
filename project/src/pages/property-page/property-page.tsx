@@ -7,7 +7,7 @@ import {useAppDispatch} from '../../hooks/useAppDispatch';
 import Header from '../../components/header/header';
 import CardList from '../../components/card-list/card-list';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {CardClassName, MAX_PROPERTY_IMAGES_COUNT, MIN_PROPERTY_IMAGES_COUNT} from '../../components/const';
+import {CardClassName, MIN_PROPERTY_IMAGES_COUNT, MAX_PROPERTY_IMAGES_COUNT} from '../../components/const';
 import ReviewList from '../../components/review-list.tsx/review-list';
 import ReviewForm from '../../components/review-form/review-form';
 import Map from '../../components/map/map';
@@ -17,6 +17,7 @@ import {getCurrentOffer, getNearbyOffers, getOffersLoadedData, getReviews} from 
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
 import {redirectToRoute} from '../../store/action';
 import {changeFavoriteStatusAction} from '../../store/api-actions';
+import './property-page.css';
 
 function PropertyPage(): JSX.Element {
   const {id} = useParams();
@@ -54,7 +55,7 @@ function PropertyPage(): JSX.Element {
     }
 
     dispatch(changeFavoriteStatusAction({
-      id: Number(id),
+      id: offer.id,
       status: isFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite,
     }));
   };
@@ -83,7 +84,7 @@ function PropertyPage(): JSX.Element {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className={cn('property__bookmark-button', {'property__bookmark-button--active' : isFavorite}, 'button')} type="button" onClick={handleButtonClick}>
+                <button className={cn('property__bookmark-button', {'property__bookmark-button--active' : isFavorite && authorizationStatus === AuthorizationStatus.Auth}, 'button')} type="button" onClick={handleButtonClick}>
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
