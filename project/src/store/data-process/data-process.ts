@@ -3,6 +3,7 @@ import {NameSpace} from '../../components/const';
 import {DataProcess} from '../../types/state';
 import {fetchOffersAction, fetchCurrentOfferAction, fetchNearbyOffersAction, fetchReviewListAction, sendNewReviewAction, fetchFavoriteOffersAction, changeFavoriteStatusAction} from '../api-actions';
 import {Offer} from '../../types/offer';
+import {sortReviews} from '../../utils';
 
 const initialState: DataProcess = {
   offers: [],
@@ -54,14 +55,14 @@ export const dataProcess = createSlice({
         state.isOffersDataLoading = true;
       })
       .addCase(fetchReviewListAction.fulfilled, (state, action) => {
-        state.reviews = action.payload;
+        state.reviews = sortReviews(action.payload);
         state.isOffersDataLoading = false;
       })
       .addCase(sendNewReviewAction.pending, (state) => {
         state.isOffersDataLoading = true;
       })
       .addCase(sendNewReviewAction.fulfilled, (state, action) => {
-        state.reviews = action.payload;
+        state.reviews = sortReviews(action.payload);
         state.isOffersDataLoading = false;
       })
       .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {

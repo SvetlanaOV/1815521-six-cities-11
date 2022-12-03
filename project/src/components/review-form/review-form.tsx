@@ -4,7 +4,7 @@ import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {ReviewData} from '../../types/review';
 import {sendNewReviewAction} from '../../store/api-actions';
-import {getCurrentOffer} from '../../store/data-process/selectors';
+import {getCurrentOffer, getOffersLoadedData} from '../../store/data-process/selectors';
 
 function ReviewForm(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -24,10 +24,11 @@ function ReviewForm(): JSX.Element {
   };
 
   const currentOffer = useAppSelector(getCurrentOffer);
+  const isDataLoading = useAppSelector(getOffersLoadedData);
 
   const isFormValid = formData.rating !== '' && formData.comment.length > MIN_REVIEW_LENGTH && formData.comment.length < MAX_REVIEW_LENGTH;
 
-  const isButtonDisabled = !isFormValid;
+  const isButtonDisabled = !isFormValid || isDataLoading;
 
   const reviewFormSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
