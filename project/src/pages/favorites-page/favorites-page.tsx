@@ -1,14 +1,14 @@
 import {Link} from 'react-router-dom';
 import {Helmet} from 'react-helmet-async';
 import {AppRoute} from '../../components/const';
-import {CardClassName} from '../../components/const';
 import Header from '../../components/header/header';
-import FavoritesCardList from '../../components/favorites-card-list/favorites-card-list';
+import {getFavoriteOffers} from '../../store/data-process/selectors';
 import {useAppSelector} from '../../hooks/useAppSelector';
-import {getOffers} from '../../store/data-process/selectors';
+import FavoritesEmptyPage from '../../components/favorites-page-empty/favorites-page-empty';
+import FavoritesPageContent from '../../components/favorites-page-content/favorites-page-content';
 
 function FavoritesPage(): JSX.Element {
-  const offers = useAppSelector(getOffers);
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
 
   return (
     <div className="page">
@@ -19,10 +19,7 @@ function FavoritesPage(): JSX.Element {
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesCardList offers={offers} className={CardClassName.Favorites} />
-          </section>
+          {(favoriteOffers?.length === 0) ? <FavoritesEmptyPage /> : <FavoritesPageContent />}
         </div>
       </main>
       <footer className="footer container">

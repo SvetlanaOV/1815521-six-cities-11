@@ -4,12 +4,13 @@ import {Marker, Icon, LayerGroup} from 'leaflet';
 import useMap from '../../hooks/useMap';
 import {UrlMapMarker, MapMarker, MapMarkerAnchor} from '../const';
 import {Offer} from '../../types/offer';
+import {getSelectedOffer} from '../../store/data-process/selectors';
+import {useAppSelector} from '../../hooks/useAppSelector';
 
 type MapProps = {
   offers: Offer[];
   city: string;
   className: string;
-  selectedOffer: Offer | undefined;
 };
 
 const defaultCustomIcon = new Icon({
@@ -24,9 +25,11 @@ const currentCustomIcon = new Icon({
   iconAnchor: [MapMarkerAnchor.Height, MapMarkerAnchor.Width],
 });
 
-function Map({className, offers, city, selectedOffer}: MapProps): JSX.Element {
+function Map({className, offers, city}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+
+  const selectedOffer = useAppSelector(getSelectedOffer);
 
   useEffect(() => {
     const newLayer: LayerGroup = new LayerGroup();

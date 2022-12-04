@@ -11,6 +11,7 @@ export enum APIRoute {
   Reviews = '/comments',
   Login = '/login',
   Logout = '/logout',
+  Favorite = '/favorite'
 }
 
 export enum NameSpace {
@@ -85,7 +86,6 @@ export const CITIES = [
   }
 ];
 
-
 export const DEFAULT_SORT_TYPE = 'Popular';
 
 export enum SortType {
@@ -93,6 +93,11 @@ export enum SortType {
   LowToHigh = 'Price: low to high',
   HighToLow = 'Price: high to low',
   TopRatedFirst = 'Top rated first',
+}
+
+export enum FavoriteStatus {
+  Favorite = 0,
+  NotFavorite = 1,
 }
 
 export const REVIEW_STAR_RATING = [
@@ -140,3 +145,7 @@ export const PASSWORD_REG_EXP = '^(?=.*[0-9])(?=.*[A-Za-z])([A-Za-z0-9]+)$';
 export const MIN_REVIEW_LENGTH = 50;
 
 export const MAX_REVIEW_LENGTH = 300;
+
+export const MIN_PROPERTY_IMAGES_COUNT = 0;
+
+export const MAX_PROPERTY_IMAGES_COUNT = 6;

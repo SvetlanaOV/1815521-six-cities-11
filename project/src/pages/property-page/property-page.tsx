@@ -1,19 +1,23 @@
 import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
+import cn from 'classnames';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {fetchCurrentOfferAction, fetchNearbyOffersAction, fetchReviewListAction} from '../../store/api-actions';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import Header from '../../components/header/header';
 import CardList from '../../components/card-list/card-list';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {CardClassName} from '../../components/const';
+import {CardClassName, MIN_PROPERTY_IMAGES_COUNT, MAX_PROPERTY_IMAGES_COUNT} from '../../components/const';
 import ReviewList from '../../components/review-list.tsx/review-list';
 import ReviewForm from '../../components/review-form/review-form';
 import Map from '../../components/map/map';
-import {AuthorizationStatus, REVIEW_STAR_WIDTH} from '../../components/const';
+import {AuthorizationStatus, REVIEW_STAR_WIDTH, AppRoute, FavoriteStatus} from '../../components/const';
 import NotFoundPage from '../not-found-page/not-found-page';
-import { getCurrentOffer, getNearbyOffers, getOffersLoadedData, getReviews } from '../../store/data-process/selectors';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import {getCurrentOffer, getNearbyOffers, getOffersLoadedData, getReviews} from '../../store/data-process/selectors';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
+import {redirectToRoute} from '../../store/action';
+import {changeFavoriteStatusAction} from '../../store/api-actions';
+import './property-page.css';
 
 function PropertyPage(): JSX.Element {
   const {id} = useParams();
@@ -43,7 +47,18 @@ function PropertyPage(): JSX.Element {
     return <NotFoundPage/>;
   }
 
-  const {images, title, isPremium, rating, type, bedrooms, maxAdults, goods,price, host, description} = offer;
+  const {images, title, isPremium, rating, type, bedrooms, maxAdults, goods,price, host, description, isFavorite} = offer;
+
+  const handleButtonClick = () => {
+    if (authorizationStatus !== AuthorizationStatus.Auth) {
+      dispatch(redirectToRoute(AppRoute.Login));
+    }
+
+    dispatch(changeFavoriteStatusAction({
+      id: offer.id,
+      status: isFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite,
+    }));
+  };
 
   return (
     <div className="page">
@@ -54,7 +69,7 @@ function PropertyPage(): JSX.Element {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {
-                images.map((image) => (
+                images.slice(MIN_PROPERTY_IMAGES_COUNT, MAX_PROPERTY_IMAGES_COUNT).map((image) => (
                   <div className="property__image-wrapper" key={image}>
                     <img className="property__image" src={image} alt="studio" />
                   </div>
@@ -69,11 +84,11 @@ function PropertyPage(): JSX.Element {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button className={cn('property__bookmark-button', {'property__bookmark-button--active' : isFavorite && authorizationStatus === AuthorizationStatus.Auth}, 'button')} type="button" onClick={handleButtonClick}>
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
-                  <span className="visually-hidden">To bookmarks</span>
+                  <span className="visually-hidden">{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
                 </button>
               </div>
               <div className="property__rating rating">
@@ -128,7 +143,7 @@ function PropertyPage(): JSX.Element {
               </section>
             </div>
           </div>
-          <Map offers={nearbyOffers.concat(offer)} className='property__map' city={offer.city.name} selectedOffer={offer}/>
+          <Map offers={nearbyOffers.concat(offer)} className='property__map' city={offer.city.name} />
         </section>
         <div className="container">
           <section className="near-places places">

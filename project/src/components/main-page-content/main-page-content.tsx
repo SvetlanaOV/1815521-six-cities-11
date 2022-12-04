@@ -6,15 +6,13 @@ import {CardClassName} from '../../components/const';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import {Offer} from '../../types/offer';
 import {getCity, getOffersByCity, getSortedOffers} from '../../store/action-process/selectors';
-import {getOffersLoadedData, getSelectedOffer} from '../../store/data-process/selectors';
+import {getOffersLoadedData} from '../../store/data-process/selectors';
 
 function MainPageContent(): JSX.Element {
   const offers = useAppSelector(getOffersByCity);
   const currentCity = useAppSelector(getCity);
 
   const sortedOffers = useAppSelector(getSortedOffers);
-
-  const selectedOffer = useAppSelector(getSelectedOffer);
 
   const offerLoadingStatus = useAppSelector(getOffersLoadedData);
 
@@ -34,7 +32,7 @@ function MainPageContent(): JSX.Element {
           </div>
         </section>
         <div className="cities__right-section">
-          <Map offers={offers} className='cities' city={currentCity} selectedOffer={selectedOffer}/>
+          <Map offers={offers} className='cities' city={currentCity} />
         </div>
       </div>
     </div>
