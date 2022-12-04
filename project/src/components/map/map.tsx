@@ -11,7 +11,6 @@ type MapProps = {
   offers: Offer[];
   city: string;
   className: string;
-  //selectedOffer: Offer | undefined;
 };
 
 const defaultCustomIcon = new Icon({
