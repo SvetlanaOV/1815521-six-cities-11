@@ -134,6 +134,5 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoute.Logout);
     dropToken();
     dispatch(fetchOffersAction());
-    //dispatch(fetchFavoriteOffersAction());
   },
 );

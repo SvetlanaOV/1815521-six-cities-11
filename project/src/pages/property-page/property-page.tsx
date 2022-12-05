@@ -39,7 +39,7 @@ function PropertyPage(): JSX.Element {
     }
   }, [id, dispatch]);
 
-  if(isOffersDataLoading || offer?.id !== Number(id)) {
+  if(isOffersDataLoading) {
     return <LoadingScreen/>;
   }
 
@@ -53,11 +53,11 @@ function PropertyPage(): JSX.Element {
     if (authorizationStatus !== AuthorizationStatus.Auth) {
       dispatch(redirectToRoute(AppRoute.Login));
     }
-
-    dispatch(changeFavoriteStatusAction({
+    else {dispatch(changeFavoriteStatusAction({
       id: offer.id,
-      status: isFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite,
+      status: (isFavorite) ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite,
     }));
+    }
   };
 
   return (
