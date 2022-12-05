@@ -25,11 +25,11 @@ function Card({offer, className}: CardProps) {
     if (authorizationStatus !== AuthorizationStatus.Auth) {
       dispatch(redirectToRoute(AppRoute.Login));
     }
-
-    dispatch(changeFavoriteStatusAction({
+    else {dispatch(changeFavoriteStatusAction({
       id: offer.id,
       status: (isFavorite) ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite,
     }));
+    }
   };
 
   return(
@@ -40,7 +40,11 @@ function Card({offer, className}: CardProps) {
       {isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place" />
+          <img className="place-card__image" src={previewImage}
+            width={(className === CardClassName.Favorites) ? 150 : 260}
+            height={(className === CardClassName.Favorites) ? 110 : 200}
+            alt="Place"
+          />
         </Link>
       </div>
       <div className="place-card__info">
