@@ -7,7 +7,6 @@ import {SortType} from '../../components/const';
 export const getOffers = (state: State): Offer[] => state[NameSpace.Data].offers;
 export const getCity = (state: State) => state[NameSpace.Action].city;
 export const getSortType = (state: State) => state[NameSpace.Action].sortType;
-export const getHandlerStatus = (state: State) => state[NameSpace.Action].sortType;
 
 export const getOffersByCity = createSelector(
   [getOffers, getCity],
