@@ -1,7 +1,7 @@
 import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
-import {configureMockStore, MockStore} from '@jedmao/redux-mock-store';
+import {configureMockStore} from '@jedmao/redux-mock-store';
 import HistoryRouter from '../history-route/history-route';
 import {DEFAULT_CITY, DEFAULT_SORT_TYPE, AuthorizationStatus, AppRoute} from '../../components/const';
 import App from './app';
