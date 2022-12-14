@@ -149,3 +149,11 @@ export const MAX_REVIEW_LENGTH = 300;
 export const MIN_PROPERTY_IMAGES_COUNT = 0;
 
 export const MAX_PROPERTY_IMAGES_COUNT = 6;
+
+export const CARD_WIDTH = 260;
+
+export const CARD_HEIGHT = 200;
+
+export const CARD_FAVORITE_WIDTH = 150;
+
+export const CARD_FAVORITE_HEIGHT = 110;

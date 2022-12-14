@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import cn from 'classnames';
 import {Offer} from '../../types/offer';
-import {CardClassName, REVIEW_STAR_WIDTH, AuthorizationStatus, AppRoute, FavoriteStatus} from '../../components/const';
+import {CardClassName, REVIEW_STAR_WIDTH, AuthorizationStatus, AppRoute, FavoriteStatus, CARD_FAVORITE_HEIGHT, CARD_FAVORITE_WIDTH, CARD_HEIGHT, CARD_WIDTH} from '../../components/const';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {selectOffer} from '../../store/data-process/data-process';
@@ -41,8 +41,8 @@ function Card({offer, className}: CardProps) {
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage}
-            width={(className === CardClassName.Favorites) ? 150 : 260}
-            height={(className === CardClassName.Favorites) ? 110 : 200}
+            width={(className === CardClassName.Favorites) ? CARD_FAVORITE_WIDTH : CARD_WIDTH}
+            height={(className === CardClassName.Favorites) ? CARD_FAVORITE_HEIGHT : CARD_HEIGHT}
             alt="Place"
           />
         </Link>
