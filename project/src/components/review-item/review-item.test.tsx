@@ -19,6 +19,6 @@ describe('Component: PlaceCard', () => {
         </HistoryRouter>
       </Provider>);
 
-    expect(screen.getByText(new RegExp(`${review.comment}`))).toBeInTheDocument();
+    expect(screen.getByText(new RegExp(review.comment, 'i'))).toBeInTheDocument();
   });
 });
