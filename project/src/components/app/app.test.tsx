@@ -27,6 +27,8 @@ const fakeApp = (
   </Provider>
 );
 
+window.scrollTo = jest.fn();
+
 describe('Application Routing', () => {
   it('should render "MainPage" when user navigate to "/"', () => {
     history.push(AppRoute.Root);
